@@ -29,27 +29,31 @@ def read_circle_data(filename):
     #Вернул как смог, мейби можно чище сделать
     return data[0], data[1][0] 
 
+def main():
 # Запрашиваем у пользователя пути к файлам
-path_to_coord = input("Введите путь к файлу с координатами точек: ")
-path_to_circle = input("Введите путь к файлу с данными окружности: ")
+    path_to_coord = input("Введите путь к файлу с координатами точек: ")
+    path_to_circle = input("Введите путь к файлу с данными окружности: ")
 
 # Нашел, что можно обработать "мягко" ошибки. Вай нот.
-try:
-    points = read_points(path_to_coord)
-    center, r = read_circle_data(path_to_circle)
+    try:
+        points = read_points(path_to_coord)
+        center, r = read_circle_data(path_to_circle)
 
-    print("Точки:", points)
-    print("Центр окружности:", center, "Радиус:", r)
+        print("Точки:", points)
+        print("Центр окружности:", center, "Радиус:", r)
 
 # Проверяем каждую точку и выводим.
-    c, d = center
-    for a, b in points:
-        distance = math.sqrt((c - a) ** 2 + (d - b) ** 2)
-        print(0 if distance == r else 2 if distance > r else 1)
+        c, d = center
+        for a, b in points:
+            distance = math.sqrt((c - a) ** 2 + (d - b) ** 2)
+            print(0 if distance == r else 2 if distance > r else 1)
 
-except ValueError as errVal:
-    print(errVal)
-except FileNotFoundError:
-    print("Ошибка: Файл не найден. Проверьте путь и попробуйте снова.")
-except Exception as errExept:
-    print(f"Произошла ошибка: {errExept}")
+    except ValueError as errVal:
+        print(errVal)
+    except FileNotFoundError:
+        print("Ошибка: Файл не найден. Проверьте путь и попробуйте снова.")
+    except Exception as errExept:
+        print(f"Произошла ошибка: {errExept}")
+
+if __name__ == "__main__":
+    main()
