@@ -18,7 +18,7 @@ def read_points(filename):
     with open(filename, "r") as file:
         return [tuple(data) for line in file if (data := parse_line(line)) and len(data) == 2]
     if not (1 <= len(points) <= 100):
-        raise ValueError(f"Ошибка: количество точек должно быть от 1 до 100, а в файле {len(points)} точек.")
+        raise ValueError(f"Error: amount of points must be between 1 and 100, file contains {len(points)} of points.")
     
     return points
 
@@ -31,16 +31,16 @@ def read_circle_data(filename):
 
 def main():
 # Запрашиваем у пользователя пути к файлам
-    path_to_coord = input("Введите путь к файлу с координатами точек: ")
-    path_to_circle = input("Введите путь к файлу с данными окружности: ")
+    path_to_coord = input("Enter the path to file with points coordinates: ")
+    path_to_circle = input("Enter the path to file with circle data: ")
 
 # Нашел, что можно обработать "мягко" ошибки. Вай нот.
     try:
         points = read_points(path_to_coord)
         center, r = read_circle_data(path_to_circle)
 
-        print("Точки:", points)
-        print("Центр окружности:", center, "Радиус:", r)
+        # print("Points:", points)
+        # print("Circle center coordinates:", center, "Radius:", r)
 
 # Проверяем каждую точку и выводим.
         c, d = center
@@ -51,9 +51,9 @@ def main():
     except ValueError as errVal:
         print(errVal)
     except FileNotFoundError:
-        print("Ошибка: Файл не найден. Проверьте путь и попробуйте снова.")
+        print("Error: Cant find the file. Check the path and try again.")
     except Exception as errExept:
-        print(f"Произошла ошибка: {errExept}")
+        print(f"Error exeption: {errExept}")
 
 if __name__ == "__main__":
     main()
